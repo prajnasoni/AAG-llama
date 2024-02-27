@@ -29,16 +29,6 @@ const MODELS = [
     name: "Llama 2 70B",
     shortened: "70B",
   },
-  {
-    id: "yorickvp/llava-13b",
-    name: "Llava 13B",
-    shortened: "Llava",
-  },
-  {
-    id: "nateraw/salmonn",
-    name: "Salmonn",
-    shortened: "Salmonn",
-  },
 ];
 
 const llamaTemplate = LlamaTemplate();
@@ -57,40 +47,6 @@ const generatePrompt = (template, systemPrompt, messages) => {
     ...chat,
   ]);
 };
-
-function CTA({ shortenedModelName }) {
-  if (shortenedModelName == "Llava") {
-    return (
-      <a
-        href="https://replicate.com/blog/run-llama-2-with-an-api?utm_source=project&utm_campaign=llama2ai"
-        target="_blank"
-        className="underline"
-      >
-        Run and fine-tune Llava in the cloud.
-      </a>
-    );
-  } else if (shortenedModelName == "Salmonn") {
-    return (
-      <a
-        href="https://replicate.com/blog/run-llama-2-with-an-api?utm_source=project&utm_campaign=llama2ai"
-        target="_blank"
-        className="underline"
-      >
-        Run and fine-tune Salmonn in the cloud.
-      </a>
-    );
-  } else {
-    return (
-      <a
-        href="https://replicate.com/blog/run-llama-2-with-an-api?utm_source=project&utm_campaign=llama2ai"
-        target="_blank"
-        className="underline"
-      >
-        Run and fine-tune Llama 2 in the cloud.
-      </a>
-    );
-  }
-}
 
 const metricsReducer = (state, action) => {
   switch (action.type) {
@@ -116,17 +72,11 @@ export default function HomePage() {
   //   Llama params
   const [model, setModel] = useState(MODELS[2]); // default to 70B
   const [systemPrompt, setSystemPrompt] = useState(
-    "You are a helpful assistant."
+    "You are an education assistant for high school students studying history."
   );
   const [temp, setTemp] = useState(0.75);
   const [topP, setTopP] = useState(0.9);
   const [maxTokens, setMaxTokens] = useState(800);
-
-  //  Llava params
-  const [image, setImage] = useState(null);
-
-  // Salmonn params
-  const [audio, setAudio] = useState(null);
 
   const [metrics, dispatch] = useReducer(metricsReducer, {
     startedAt: null,
@@ -142,8 +92,6 @@ export default function HomePage() {
       temperature: parseFloat(temp),
       topP: parseFloat(topP),
       maxTokens: parseInt(maxTokens),
-      image: image,
-      audio: audio,
     },
 
     onError: (error) => {
@@ -158,33 +106,6 @@ export default function HomePage() {
       dispatch({ type: "COMPLETE" });
     },
   });
-
-  const handleFileUpload = (file) => {
-    if (file) {
-      // determine if file is image or audio
-      if (
-        ["audio/mpeg", "audio/wav", "audio/ogg"].includes(
-          file.originalFile.mime
-        )
-      ) {
-        setAudio(file.fileUrl);
-        setModel(MODELS[4]);
-        toast.success(
-          "You uploaded an audio file, so you're now speaking with Salmonn."
-        );
-      } else if (["image/jpeg", "image/png"].includes(file.originalFile.mime)) {
-        setImage(file.fileUrl);
-        setModel(MODELS[3]);
-        toast.success(
-          "You uploaded an image, so you're now speaking with Llava."
-        );
-      } else {
-        toast.error(
-          `Sorry, we don't support that file type (${file.originalFile.mime}) yet. Feel free to push a PR to add support for it!`
-        );
-      }
-    }
-  };
 
   const setAndSubmitPrompt = (newPrompt) => {
     handleSubmit(newPrompt);
@@ -254,38 +175,12 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="bg-slate-100 border-b-2 text-center p-3">
-        Powered by Replicate. <CTA shortenedModelName={model.shortened} />
-      </div>
       <nav className="grid grid-cols-2 pt-3 pl-6 pr-3 sm:grid-cols-3 sm:pl-0">
         <div className="hidden sm:inline-block"></div>
         <div className="font-semibold text-gray-500 sm:text-center">
-          {model.shortened == "Llava"
-            ? "🌋"
-            : model.shortened == "Salmonn"
-            ? "🐟"
-            : "🦙"}{" "}
-          <span className="hidden sm:inline-block">Chat with</span>{" "}
-          <button
-            className="py-2 font-semibold text-gray-500 hover:underline"
-            onClick={() => setOpen(true)}
-          >
-            {model.shortened == "Llava" || model.shortened == "Salmonn"
-              ? model.shortened
-              : "Llama 2 " + model.shortened}
-          </button>
+          <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: User Study Phase 1</span>{" "}
         </div>
         <div className="flex justify-end">
-          <a
-            className="inline-flex items-center px-3 py-2 mr-3 text-sm font-semibold text-gray-700 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            href="https://github.com/replicate/chat"
-          >
-            <CodeBracketIcon
-              className="w-5 h-5 text-gray-500 sm:mr-2 group-hover:text-gray-900"
-              aria-hidden="true"
-            />{" "}
-            <span className="hidden sm:inline">Clone on GitHub</span>
-          </a>
           <button
             type="button"
             className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -304,7 +199,7 @@ export default function HomePage() {
 
       <main className="max-w-2xl pb-5 mx-auto mt-4 sm:px-4">
         <div className="text-center"></div>
-        {messages.length == 0 && !image && !audio && (
+        {messages.length == 0 && (
           <EmptyState setPrompt={setAndSubmitPrompt} setOpen={setOpen} />
         )}
 
@@ -325,23 +220,10 @@ export default function HomePage() {
           setSize={setModel}
         />
 
-        {image && (
-          <div>
-            <img src={image} className="mt-6 sm:rounded-xl" />
-          </div>
-        )}
-
-        {audio && (
-          <div>
-            <audio controls src={audio} className="mt-6 sm:rounded-xl" />
-          </div>
-        )}
-
         <ChatForm
           prompt={input}
           setPrompt={setInput}
           onSubmit={handleSubmit}
-          handleFileUpload={handleFileUpload}
           completion={completion}
           metrics={metrics}
         />

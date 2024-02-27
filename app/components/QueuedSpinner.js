@@ -19,7 +19,7 @@ const QueuedSpinner = () => {
           />
         </svg>
       </div>
-      <p className="text-gray-500 pl-3">Queued...</p>
+      <p className="text-gray-500 pl-3">Thinking...</p>
     </div>
   );
 };

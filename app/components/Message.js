@@ -17,12 +17,12 @@ const Message = ({ message, isUser }) => {
       className={`flex gap-x-4 rounded-md ${containerClass} py-5 px-5 mb-12`}
     >
       {isUser ? (
-        <span className="text-xl sm:text-2xl" title="user">
-          🥸
+        <span className="text-l sm:text-l" title="user">
+          User:
         </span>
       ) : (
-        <span className="text-xl sm:text-2xl" title="AI">
-          🦙
+        <span className="text-l sm:text-l" title="AI">
+          LLM  :
         </span>
       )}
 

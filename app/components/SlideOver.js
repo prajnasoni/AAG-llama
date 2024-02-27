@@ -48,7 +48,7 @@ export default function SlideOver({
                       <div className="bg-gray-700 px-4 py-6 sm:px-6">
                         <div className="flex items-center justify-between">
                           <Dialog.Title className="text-base font-semibold leading-6 text-white">
-                            🦙 Chat with a Llama
+                            Modify Llama's settings.
                           </Dialog.Title>
                           <div className="ml-3 flex h-7 items-center">
                             <button
@@ -66,7 +66,7 @@ export default function SlideOver({
                         </div>
                         <div className="mt-1">
                           <p className="text-sm text-gray-300">
-                            A project from Replicate.
+                            Adapted from Replicate's <a href="https://www.llama2.ai/">Llama2.ai</a>
                           </p>
                         </div>
                       </div>
@@ -85,7 +85,7 @@ export default function SlideOver({
                                 id="system-prompt-description"
                                 className="mt-2 text-xs text-gray-500"
                               >
-                                Larger size means smarter, but slower.
+                                Larger size means smarter, but slower. For the MIT study, please use 70B.
                               </p>
                               <div className="">
                                 <Listbox value={size} onChange={setSize}>

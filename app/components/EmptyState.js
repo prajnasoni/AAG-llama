@@ -3,17 +3,20 @@ export default function EmptyState({ setOpen, setPrompt }) {
     <div className="mt-12 sm:mt-24 space-y-6 text-gray-400 text-base mx-8 sm:mx-4 sm:text-2xl leading-12">
       <p>
         {" "}
-        Customize Llama&apos;s personality by clicking the{" "}
+        Option to customize Llama&apos;s settings:{" "}
         <button
           className="prompt-button inline-flex items-center "
           onClick={() => setOpen(true)}
         >
-          settings{" "}
+          here{" "}
         </button>{" "}
-        button.
+        . For the study we ask that you keep this default settings.
       </p>
       <p>
-        I can{" "}
+        This is Phase 1 of the study. We ask that you prompt the model ____ INSERT TEXT _____ To test what potential prompts can be click the examples below:
+      </p>
+      <p>
+        {" "}
         <button
           className="prompt-button"
           onClick={() =>
@@ -22,18 +25,18 @@ export default function EmptyState({ setOpen, setPrompt }) {
             )
           }
         >
-          explain concepts
+          Example 1
         </button>
-        , write{" "}
+        , <br></br>
         <button
           className="prompt-button"
           onClick={() =>
             setPrompt("Write a poem about open source machine learning. ")
           }
         >
-          poems
-        </button>{" "}
-        and{" "}
+          Example 2
+        </button>
+        , <br></br>
         <button
           className="prompt-button"
           onClick={() =>
@@ -42,9 +45,9 @@ export default function EmptyState({ setOpen, setPrompt }) {
             )
           }
         >
-          code
+          Example 3
         </button>
-        ,{" "}
+        , <br></br>
         <button
           className="prompt-button"
           onClick={() =>
@@ -53,9 +56,9 @@ export default function EmptyState({ setOpen, setPrompt }) {
             )
           }
         >
-          solve logic puzzles
+          Example 4
         </button>
-        , or even{" "}
+        , <br></br>
         <button
           className="prompt-button"
           onClick={() =>
@@ -64,10 +67,10 @@ export default function EmptyState({ setOpen, setPrompt }) {
             )
           }
         >
-          name your pets.
-        </button>{" "}
+          Example 5
+        </button>
+        .
       </p>
-      <p>Send me a message, or upload an image or audio file.</p>
     </div>
   );
 }
