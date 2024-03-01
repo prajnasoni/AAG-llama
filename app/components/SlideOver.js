@@ -21,6 +21,8 @@ export default function SlideOver({
   size,
   setSize,
   handleSubmit,
+  username,
+  setUsername,
 }) {
   return (
     <Transition.Root show={open ? true : false} as={Fragment}>
@@ -45,7 +47,7 @@ export default function SlideOver({
                     className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
                   >
                     <div className="h-0 flex-1 overflow-y-auto">
-                      <div className="bg-gray-700 px-4 py-6 sm:px-6">
+                      <div className="bg-cyan-600 px-4 py-6 sm:px-6">
                         <div className="flex items-center justify-between">
                           <Dialog.Title className="text-base font-semibold leading-6 text-white">
                             Modify Llama's settings.
@@ -53,7 +55,7 @@ export default function SlideOver({
                           <div className="ml-3 flex h-7 items-center">
                             <button
                               type="button"
-                              className="rounded-md bg-gray-700 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                              className="rounded-md bg-cyan-600 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
                               onClick={() => setOpen(false)}
                             >
                               <span className="sr-only">Close panel</span>
@@ -72,6 +74,34 @@ export default function SlideOver({
                       </div>
                       <div className="flex flex-1 flex-col justify-between">
                         <div className="divide-y divide-gray-200 px-4 sm:px-6">
+                        <div className="space-y-6 pb-5 pt-6">
+                            <div>
+                              <label
+                                htmlFor="username"
+                                className="block font-bold text-sm leading-6 text-gray-900"
+                              >
+                                Username
+                              </label>
+                              <p
+                                id="username"
+                                className="mt-2 text-xs text-gray-500"
+                              >
+                                Enter your assigned username below:
+                              </p>
+                              <div className="mt-3">
+                                <textarea
+                                  id="username"
+                                  name="username"
+                                  rows={4}
+                                  className="block w-full rounded-md border-0 h-10 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                                  value={username}
+                                  onChange={(e) =>
+                                    setUsername(e.target.value)
+                                  }
+                                />
+                              </div>
+                            </div>
+                          </div>
                           <div className="space-y-6 pb-5 pt-6">
                             <div>
                               <label
@@ -82,7 +112,7 @@ export default function SlideOver({
                               </label>
 
                               <p
-                                id="system-prompt-description"
+                                id="model-size-description"
                                 className="mt-2 text-xs text-gray-500"
                               >
                                 Larger size means smarter, but slower. For the MIT study, please use 70B.

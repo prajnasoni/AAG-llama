@@ -1,5 +1,3 @@
-import Metrics from "./Metrics";
-
 const options = {
   apiKey: "public_kW15biSARCJN7FAz6rANdRg3pNkh",
   maxFileCount: 1,
@@ -37,8 +35,6 @@ const ChatForm = ({
   prompt,
   setPrompt,
   onSubmit,
-  metrics,
-  completion,
 }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,7 +60,7 @@ const ChatForm = ({
             autoFocus
             name="prompt"
             className="flex-grow block w-full rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:leading-6"
-            placeholder="Send a message"
+            placeholder="Type here"
             required={true}
             value={prompt}
             rows={1}
@@ -76,10 +72,10 @@ const ChatForm = ({
             }}
           />
           <button
-            className="bg-gray-600 hover:bg-gray-800 items-center font-semibold text-white rounded-r-md px-5 py-3"
+            className="bg-cyan-600 hover:bg-cyan-800 items-center font-semibold text-white rounded-r-md px-5 py-3"
             type="submit"
           >
-            Chat
+            Submit
           </button>
         </form>
       </div>

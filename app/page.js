@@ -61,6 +61,52 @@ const metricsReducer = (state, action) => {
   }
 };
 
+const transformArray = (dataArray) => {
+  return dataArray.reduce((acc, curr) => {
+    // Check if text contains newline characters
+    if (curr.text.includes('\n')) {
+      // Split the text by newline and create new objects for each line
+      const lines = curr.text.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
+      const newObjects = lines.map(line => ({ text: line, isUser: curr.isUser }));
+      acc.push(...newObjects); // Spread and push to accumulator
+    } else {
+      acc.push(curr); // Push original object if no newline characters
+    }
+    console.log(acc)
+    return acc;
+  }, []); // Initial accumulator is an empty array
+};
+
+
+const downloadCSV = (messages, completion) => {
+  // assign messages to new array (don't interfere with state)
+  const downloadArray = [...messages]
+  
+  // Push last LLM response
+  if (completion.length > 0) {
+    downloadArray.push({
+      text: completion,
+      isUser: false,
+    });
+  }
+
+  const combinedText = transformArray(downloadArray).map(obj => obj.text).join(";\n");
+
+  // Convert the combined string to CSV format
+  const csvContent = "data:text/csv;charset=utf-8," + combinedText;
+
+  // Encode and create a link to trigger the download
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", "chat_export.csv");
+  document.body.appendChild(link);
+
+  link.click(); // Trigger download
+
+  document.body.removeChild(link); // Clean up after download
+};
+
 export default function HomePage() {
   const MAX_TOKENS = 4096;
   const bottomRef = useRef(null);
@@ -68,7 +114,7 @@ export default function HomePage() {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [starting, setStarting] = useState(false);
-
+  const [username, setUsername] = useState('default-test');
   //   Llama params
   const [model, setModel] = useState(MODELS[2]); // default to 70B
   const [systemPrompt, setSystemPrompt] = useState(
@@ -115,6 +161,7 @@ export default function HomePage() {
     event.preventDefault();
     setOpen(false);
     setSystemPrompt(event.target.systemPrompt.value);
+    setUsername(event.target.username.value);
   };
 
   const handleSubmit = async (userMessage) => {
@@ -178,9 +225,18 @@ export default function HomePage() {
       <nav className="grid grid-cols-2 pt-3 pl-6 pr-3 sm:grid-cols-3 sm:pl-0">
         <div className="hidden sm:inline-block"></div>
         <div className="font-semibold text-gray-500 sm:text-center">
-          <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: User Study Phase 1</span>{" "}
+          <img src="https://algorithmicalignment.csail.mit.edu/docs/assets/logo.png" alt="AAG Logo" className="inline-block mr-2 sm:mr-3 h-6" /> {/* TODO: Fix image source */}
+          <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: Llama Chat</span>{" "}
         </div>
         <div className="flex justify-end">
+        <button
+            type="button"
+            className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            onClick={() => downloadCSV(messages, completion)}
+          >
+            {" "}
+            <span className="hidden sm:inline">Export Chat</span>
+          </button>
           <button
             type="button"
             className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -218,14 +274,14 @@ export default function HomePage() {
           models={MODELS}
           size={model}
           setSize={setModel}
+          username={username}
+          setUsername={setUsername}
         />
 
         <ChatForm
           prompt={input}
           setPrompt={setInput}
           onSubmit={handleSubmit}
-          completion={completion}
-          metrics={metrics}
         />
 
         {error && <div>{error}</div>}

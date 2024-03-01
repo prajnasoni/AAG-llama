@@ -21,28 +21,6 @@ export async function POST(req) {
   // Convert the response into a friendly text-stream
   const stream = await ReplicateStream(response);
 
-  // if (response && response.urls && response.urls.stream) {
-  //   const source = new EventSource(response.urls.stream, { withCredentials: true });
-  
-  //   source.addEventListener("output", (e) => {
-  //     console.log("output", e.data);
-  //   });
-  
-  //   source.addEventListener("error", (e) => {
-  //     console.error("error", JSON.parse(e.data));
-  //   });
-  
-  //   source.addEventListener("done", (e) => {
-  //     source.close();
-  //     console.log("done", JSON.parse(e.data));
-  //   });
-  // }
-
-  // Store prompt and response to csv
-  // console.log(stream)
-  // const csvLine = `"${params.prompt.replace(/"/g, '""')}","${response.replace(/"/g, '""')}"\n`;
-  // await fs.appendFile('data.csv', csvLine, 'utf8');
-  
   // Respond with the stream
   return new StreamingTextResponse(stream);
 }
