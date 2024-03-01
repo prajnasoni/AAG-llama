@@ -78,7 +78,7 @@ const transformArray = (dataArray) => {
 };
 
 
-const downloadCSV = (messages, completion) => {
+const downloadCSV = (username, messages, completion) => {
   // assign messages to new array (don't interfere with state)
   const downloadArray = [...messages]
   
@@ -99,7 +99,7 @@ const downloadCSV = (messages, completion) => {
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
   link.setAttribute("href", encodedUri);
-  link.setAttribute("download", "chat_export.csv");
+  link.setAttribute("download", username+"_chat.csv");
   document.body.appendChild(link);
 
   link.click(); // Trigger download
@@ -232,7 +232,7 @@ export default function HomePage() {
         <button
             type="button"
             className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            onClick={() => downloadCSV(messages, completion)}
+            onClick={() => downloadCSV(username, messages, completion)}
           >
             {" "}
             <span className="hidden sm:inline">Export Chat</span>
