@@ -6,7 +6,7 @@ import Message from "./components/Message";
 import SlideOver from "./components/SlideOver";
 import EmptyState from "./components/EmptyState";
 import QueuedSpinner from "./components/QueuedSpinner";
-import { Cog6ToothIcon, CodeBracketIcon } from "@heroicons/react/20/solid";
+import { Cog6ToothIcon, ArchiveBoxArrowDownIcon } from "@heroicons/react/20/solid";
 import { useCompletion } from "ai/react";
 import { Toaster, toast } from "react-hot-toast";
 import { LlamaTemplate } from "../src/prompt_template";
@@ -222,34 +222,40 @@ export default function HomePage() {
 
   return (
     <>
-      <nav className="grid grid-cols-2 pt-3 pl-6 pr-3 sm:grid-cols-3 sm:pl-0">
-        <div className="hidden sm:inline-block"></div>
-        <div className="font-semibold text-gray-500 sm:text-center">
-          <img src="https://algorithmicalignment.csail.mit.edu/docs/assets/logo.png" alt="AAG Logo" className="inline-block mr-2 sm:mr-3 h-6" />
-          <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: Llama Chat</span>{" "}
-        </div>
-        <div className="flex justify-end">
-        <button
-            type="button"
-            className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            onClick={() => downloadCSV(username, messages, completion)}
-          >
-            {" "}
-            <span className="hidden sm:inline">Export Chat</span>
-          </button>
-          <button
-            type="button"
-            className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            onClick={() => setOpen(true)}
-          >
-            <Cog6ToothIcon
-              className="w-5 h-5 text-gray-500 sm:mr-2 group-hover:text-gray-900"
-              aria-hidden="true"
-            />{" "}
-            <span className="hidden sm:inline">Settings</span>
-          </button>
-        </div>
-      </nav>
+      <header className="z-10 top-0 left-0 right-0 border-t-2 fixed bg-slate-100">
+        <nav className="grid grid-cols-2 pt-2 pb-3 pl-3 pr-3 sm:grid-cols-3 sm:pl-0">
+          <div className="hidden sm:inline-block"></div>
+          <div className="font-semibold text-gray-500 sm:text-center">
+            <img src="https://algorithmicalignment.csail.mit.edu/docs/assets/logo.png" alt="AAG Logo" className="inline-block mr-2 sm:mr-3 h-6" />
+            <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: Llama Chat</span>{" "}
+          </div>
+          <div className="inline-flex justify-end py-auto px-3">
+            <button 
+              type="button"
+              className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              onClick={() => downloadCSV(username, messages, completion)}
+            >
+              <ArchiveBoxArrowDownIcon
+                className="w-5 h-5 text-gray-500 sm:mr-2 group-hover:text-gray-900"
+                aria-hidden="true"
+              />{" "}
+              <span className="hidden sm:inline">Export Chat</span>
+            </button>
+            <button
+              type="button"
+              className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              onClick={() => setOpen(true)}
+            >
+              <Cog6ToothIcon
+                className="w-5 h-5 text-gray-500 sm:mr-2 group-hover:text-gray-900"
+                aria-hidden="true"
+              />{" "}
+              <span className="hidden sm:inline">Settings</span>
+            </button>
+          </div>
+        </nav>
+      </header>
+      
 
       <Toaster position="top-left" reverseOrder={false} />
 
@@ -286,7 +292,8 @@ export default function HomePage() {
 
         {error && <div>{error}</div>}
 
-        <article className="pb-24">
+        <article className="pb-24 pt-20">
+
           {messages.map((message, index) => (
             <Message
               key={`message-${index}`}

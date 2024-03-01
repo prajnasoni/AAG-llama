@@ -14,7 +14,7 @@ const Message = ({ message, isUser }) => {
 
   return (
     <div
-      className={`flex gap-x-4 rounded-md ${containerClass} py-5 px-5 mb-12`}
+      className={`flex gap-x-4 rounded-md ${containerClass} py-1 px-5 mt-1 mb-3`}
     >
       {isUser ? (
         <span className="text-l sm:text-l" title="user">
@@ -26,7 +26,7 @@ const Message = ({ message, isUser }) => {
         </span>
       )}
 
-      <div className="flex flex-col text-sm sm:text-base flex-1 gap-y-4 mt-1">
+      <div className="flex flex-col text-sm sm:text-base flex-1 gap-y-3">
         {message.split("\n").map(
           (text, index) =>
             text.length > 0 && (
