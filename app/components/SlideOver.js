@@ -50,7 +50,7 @@ export default function SlideOver({
                       <div className="bg-cyan-600 px-4 py-6 sm:px-6">
                         <div className="flex items-center justify-between">
                           <Dialog.Title className="text-base font-semibold leading-6 text-white">
-                            Modify Llama's settings.
+                            Modify Llama&apos;s settings.
                           </Dialog.Title>
                           <div className="ml-3 flex h-7 items-center">
                             <button
@@ -68,7 +68,7 @@ export default function SlideOver({
                         </div>
                         <div className="mt-1">
                           <p className="text-sm text-gray-300">
-                            Adapted from Replicate's <a href="https://www.llama2.ai/">Llama2.ai</a>
+                            Adapted from Replicate&apos;s <a href="https://www.llama2.ai/">Llama2.ai</a>
                           </p>
                         </div>
                       </div>
