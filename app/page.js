@@ -225,7 +225,7 @@ export default function HomePage() {
       <nav className="grid grid-cols-2 pt-3 pl-6 pr-3 sm:grid-cols-3 sm:pl-0">
         <div className="hidden sm:inline-block"></div>
         <div className="font-semibold text-gray-500 sm:text-center">
-          <img src="https://algorithmicalignment.csail.mit.edu/docs/assets/logo.png" alt="AAG Logo" className="inline-block mr-2 sm:mr-3 h-6" /> {/* TODO: Fix image source */}
+          <img src="https://algorithmicalignment.csail.mit.edu/docs/assets/logo.png" alt="AAG Logo" className="inline-block mr-2 sm:mr-3 h-6" />
           <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: Llama Chat</span>{" "}
         </div>
         <div className="flex justify-end">
