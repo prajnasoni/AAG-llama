@@ -17,7 +17,7 @@ export default function EmptyState({ setOpen, setPrompt }) {
       </p>
       <p>
         This is Phase 1 of the study. Interact with the model as a high school student learning history. 
-        Feel free to try and catch it off-guard but asking about niche topics. Your goal is to create a dataset of interactions which you will then evaluate.
+        Feel free to try and catch it off-guard by asking about niche topics. Your goal is to create a dataset of interactions which you will then annotate.
          To look at example prompts, click the examples below. If you want to restart, reload the page.
       </p>
       <p>
