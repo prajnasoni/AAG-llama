@@ -72,7 +72,7 @@ const transformArray = (dataArray) => {
     } else {
       acc.push(curr); // Push original object if no newline characters
     }
-    console.log(acc)
+    // console.log(acc)
     return acc;
   }, []); // Initial accumulator is an empty array
 };
@@ -90,16 +90,28 @@ const downloadCSV = (username, messages, completion) => {
     });
   }
 
-  const combinedText = transformArray(downloadArray).map(obj => obj.text).join(";\n");
+  // Transform the array first
+  const transformedArray = transformArray(downloadArray);
+
+  // Then map through the transformed array to add IDs
+  const withIds = transformedArray.map((item, index) => ({
+    ...item,
+    id: index 
+  }));
+
+  const header = "ID,TEXT\n"; // Add CSV header
+  const combinedText = withIds
+    .map(obj => `${obj.id},"${obj.text.replace(/"/g, '""')}"`) // Enclose each field in double quotes and escape double quotes in text
+    .join("\n");
 
   // Convert the combined string to CSV format
-  const csvContent = "data:text/csv;charset=utf-8," + combinedText;
+  const csvContent = "data:text/csv;charset=utf-8," + header + combinedText;
 
   // Encode and create a link to trigger the download
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
   link.setAttribute("href", encodedUri);
-  link.setAttribute("download", username+"_chat.csv");
+  link.setAttribute("download", `${username}_chat.csv`);
   document.body.appendChild(link);
 
   link.click(); // Trigger download
