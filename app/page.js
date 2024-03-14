@@ -96,10 +96,10 @@ const downloadCSV = (username, messages, completion) => {
   // Then map through the transformed array to add IDs
   const withIds = transformedArray.map((item, index) => ({
     ...item,
-    id: index 
+    id: index+1 
   }));
 
-  const header = "ID,TEXT\n"; // Add CSV header
+  const header = "ID,TEXT\n0," + username.toUpperCase() + " CHAT\n"; // Add CSV header
   const combinedText = withIds
     .map(obj => `${obj.id},"${obj.text.replace(/"/g, '""')}"`) // Enclose each field in double quotes and escape double quotes in text
     .join("\n");
