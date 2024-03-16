@@ -130,11 +130,11 @@ export default function HomePage() {
   //   Llama params
   const [model, setModel] = useState(MODELS[2]); // default to 70B
   const [systemPrompt, setSystemPrompt] = useState(
-    "You are an education assistant for high school students studying history."
+    "You are an education assistant for high school students studying history. Answer questions to help pique the student's curiosity of the topic. Limit your answers to 2 paragraphs."
   );
   const [temp, setTemp] = useState(0.75);
   const [topP, setTopP] = useState(0.9);
-  const [maxTokens, setMaxTokens] = useState(800);
+  const [maxTokens, setMaxTokens] = useState(500);
 
   const [metrics, dispatch] = useReducer(metricsReducer, {
     startedAt: null,
