@@ -81,7 +81,7 @@ const transformArray = (dataArray) => {
 const downloadCSV = (username, messages, completion) => {
   // assign messages to new array (don't interfere with state)
   const downloadArray = [...messages]
-  
+
   // Push last LLM response
   if (completion.length > 0) {
     downloadArray.push({
@@ -96,7 +96,7 @@ const downloadCSV = (username, messages, completion) => {
   // Then map through the transformed array to add IDs
   const withIds = transformedArray.map((item, index) => ({
     ...item,
-    id: index+1 
+    id: index + 1
   }));
 
   const header = "ID,TEXT\n0," + username.toUpperCase() + " CHAT\n"; // Add CSV header
@@ -126,11 +126,11 @@ export default function HomePage() {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
   const [starting, setStarting] = useState(false);
-  const [username, setUsername] = useState('default-test');
+  const [username, setUsername] = useState('default');
   //   Llama params
   const [model, setModel] = useState(MODELS[2]); // default to 70B
   const [systemPrompt, setSystemPrompt] = useState(
-    "You are an education assistant for high school students studying history. Answer questions to help pique the student's curiosity of the topic. Limit your answers to 2 paragraphs."
+    "You are an education assistant for high school students studying history in India. Answer questions to help pique the student's curiosity of the topic. Limit your answers to 2 paragraphs."
   );
   const [temp, setTemp] = useState(0.75);
   const [topP, setTopP] = useState(0.9);
@@ -242,7 +242,7 @@ export default function HomePage() {
             <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: Llama Chat</span>{" "}
           </div>
           <div className="inline-flex justify-end py-auto px-3">
-            <button 
+            <button
               type="button"
               className="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               onClick={() => downloadCSV(username, messages, completion)}
@@ -267,7 +267,7 @@ export default function HomePage() {
           </div>
         </nav>
       </header>
-      
+
 
       <Toaster position="top-left" reverseOrder={false} />
 
@@ -283,15 +283,6 @@ export default function HomePage() {
           systemPrompt={systemPrompt}
           setSystemPrompt={setSystemPrompt}
           handleSubmit={handleSettingsSubmit}
-          temp={temp}
-          setTemp={setTemp}
-          maxTokens={maxTokens}
-          setMaxTokens={setMaxTokens}
-          topP={topP}
-          setTopP={setTopP}
-          models={MODELS}
-          size={model}
-          setSize={setModel}
           username={username}
           setUsername={setUsername}
         />

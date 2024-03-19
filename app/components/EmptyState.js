@@ -4,21 +4,21 @@ export default function EmptyState({ setOpen, setPrompt }) {
       <p>
         {" "}
         Welcome to the Chatbot interface!
-        </p>
-        <p>
-          Please enter your username in the {" "}
+      </p>
+      <p>
+        Please enter your username in the {" "}
         <button
           className="prompt-button inline-flex items-center "
           onClick={() => setOpen(true)}
         >
           settings panel{" "}
         </button>
-        . For the study, we ask that you keep all default settings otherwise.
+        .
       </p>
       <p>
-        This is Phase 1 of the study. Interact with the model as a high school student learning history. 
+        This is Phase 1 of the study. Interact with the model as a high school student learning history.
         Feel free to try and catch it off-guard by asking about niche topics. Your goal is to create a dataset of interactions which you will then annotate.
-         To look at example prompts, click the examples below. If you want to restart, reload the page.
+        To look at example prompts, click the examples below. If you want to restart, reload the page.
       </p>
       <p>
         {" "}
@@ -38,7 +38,7 @@ export default function EmptyState({ setOpen, setPrompt }) {
           onClick={() =>
             setPrompt(
               "What caused the division into India and Pakistan?"
-              )
+            )
           }
         >
           Example 2
@@ -54,7 +54,7 @@ export default function EmptyState({ setOpen, setPrompt }) {
         >
           Example 3
         </button>
-        
+
       </p>
     </div>
   );
