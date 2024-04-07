@@ -17,8 +17,16 @@ export default function EmptyState({ setOpen, setPrompt }) {
       </p>
       <p>
         This is Phase 1 of the study. Interact with the model as a high school student learning history.
-        Feel free to try and catch it off-guard by asking about niche topics. Your goal is to create a dataset of interactions which you will then annotate.
-        To look at example prompts, click the examples below. If you want to restart, reload the page.
+        Feel free to try and catch it off-guard by asking about niche topics. <b>Your goal is to create a dataset of interactions which you will then annotate.</b>
+      </p>
+      <p>
+        If you want to restart, reload the page.
+      </p>
+      <p>
+        Note: If the model stops responding mid-sentence, prompt it with "Please continue." to allow it to finish its thought.
+      </p>
+      <p>
+        To look at example prompts, click the examples below.
       </p>
       <p>
         {" "}
@@ -30,7 +38,18 @@ export default function EmptyState({ setOpen, setPrompt }) {
             )
           }
         >
-          Example 1
+          Who was Gandhi?
+        </button>
+        <br></br>
+        <button
+          className="prompt-button"
+          onClick={() =>
+            setPrompt(
+              "Who were the Allies in WW2?"
+            )
+          }
+        >
+          Who were the Allies in WW2?
         </button>
         <br></br>
         <button
@@ -41,20 +60,8 @@ export default function EmptyState({ setOpen, setPrompt }) {
             )
           }
         >
-          Example 2
+          What caused the division into India and Pakistan?
         </button>
-        <br></br>
-        <button
-          className="prompt-button"
-          onClick={() =>
-            setPrompt(
-              "What was the Supreme Court ruling for the land under Babri Masjid?"
-            )
-          }
-        >
-          Example 3
-        </button>
-
       </p>
     </div>
   );

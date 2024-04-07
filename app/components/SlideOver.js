@@ -11,15 +11,6 @@ export default function SlideOver({
   setOpen,
   systemPrompt,
   setSystemPrompt,
-  temp,
-  setTemp,
-  topP,
-  setTopP,
-  maxTokens,
-  setMaxTokens,
-  models,
-  size,
-  setSize,
   handleSubmit,
   username,
   setUsername,
@@ -102,7 +93,7 @@ export default function SlideOver({
                               </div>
                             </div>
                           </div>
-                          <div className="space-y-6 pb-5 pt-6">
+                          {/* <div className="space-y-6 pb-5 pt-6">
                             <div>
                               <label
                                 htmlFor="description"
@@ -130,7 +121,7 @@ export default function SlideOver({
                                 />
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
