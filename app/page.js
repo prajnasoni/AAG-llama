@@ -63,14 +63,16 @@ const metricsReducer = (state, action) => {
 
 const transformArray = (dataArray) => {
   return dataArray.reduce((acc, curr) => {
+    // Append "[Prompt] " to prompts by user
+    const updatedText = curr.isUser ? `[Prompt] ${curr.text}` : curr.text;
     // Check if text contains newline characters
-    if (curr.text.includes('\n')) {
+    if (updatedText.includes('\n')) {
       // Split the text by newline and create new objects for each line
-      const lines = curr.text.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
+      const lines = updatedText.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
       const newObjects = lines.map(line => ({ text: line, isUser: curr.isUser }));
       acc.push(...newObjects); // Spread and push to accumulator
     } else {
-      acc.push(curr); // Push original object if no newline characters
+      acc.push({ ...curr, text: updatedText }); // Push original object if no newline characters
     }
     // console.log(acc)
     return acc;
