@@ -113,7 +113,7 @@ const downloadCSV = (username, messages, completion) => {
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
   link.setAttribute("href", encodedUri);
-  link.setAttribute("download", `${username}_chat.csv`);
+  link.setAttribute("download", `${username.toLowerCase()}_chat.csv`);
   document.body.appendChild(link);
 
   link.click(); // Trigger download
