@@ -23,7 +23,7 @@ export default function EmptyState({ setOpen, setPrompt }) {
         If you want to restart, reload the page.
       </p>
       <p>
-        Note: If the model stops responding mid-sentence, prompt it with "Please continue." to allow it to finish its thought.
+        Note: If the model stops responding mid-sentence, prompt it with &quot;Please continue.&quot; to allow it to finish its thought.
       </p>
       <p>
         To look at example prompts, click the examples below.
