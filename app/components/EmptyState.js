@@ -3,7 +3,13 @@ export default function EmptyState({ setOpen, setPrompt }) {
     <div className="mt-12 sm:mt-24 space-y-5 text-gray-400 text-base mx-8 sm:mx-4 sm:text-l leading-12">
       <p>
         {" "}
-        Welcome to the Chatbot interface!
+        Welcome to the Educational Assistant!
+      </p>
+      <p>
+        Through this study, we are keen to understand the <i><b>values and qualities</b></i> that you see or would like to see in the context of this AI application. <b>Your goal is to create a dataset of interactions which you will then annotate.</b>
+      </p>
+      <p>
+        (If you want to restart your interactions, reload the page.)
       </p>
       <p>
         Please enter your username in the {" "}
@@ -14,13 +20,6 @@ export default function EmptyState({ setOpen, setPrompt }) {
           settings panel{" "}
         </button>
         .
-      </p>
-      <p>
-        This is Phase 1 of the study. Interact with the model as a high school student learning history.
-        Feel free to try and catch it off-guard by asking about niche topics. <b>Your goal is to create a dataset of interactions which you will then annotate.</b>
-      </p>
-      <p>
-        If you want to restart, reload the page.
       </p>
       <p>
         Note: If the model stops responding mid-sentence, prompt it with &quot;Please continue.&quot; to allow it to finish its thought.
