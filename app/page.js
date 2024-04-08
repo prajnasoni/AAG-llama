@@ -139,7 +139,7 @@ export default function HomePage() {
   );
   const [temp, setTemp] = useState(0.75);
   const [topP, setTopP] = useState(0.9);
-  const [maxTokens, setMaxTokens] = useState(500);
+  const [maxTokens, setMaxTokens] = useState(800);
 
   const [metrics, dispatch] = useReducer(metricsReducer, {
     startedAt: null,
