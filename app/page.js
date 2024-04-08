@@ -65,8 +65,7 @@ const transformArray = (dataArray) => {
   return dataArray.reduce((acc, curr) => {
     // Append "[Prompt] " to prompts by user
     if (curr.isUser) {
-      updatedText = `[Prompt] ` + curr.text;
-      curr.text = updatedText
+      curr.text = `[Prompt] ` + curr.text;
     }
     // Check if text contains newline characters
     if (curr.text.includes('\n')) {
