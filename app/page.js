@@ -29,6 +29,11 @@ const MODELS = [
     name: "Llama 2 70B",
     shortened: "70B",
   },
+  {
+    id: "mistralai/mixtral-8x7b-instruct-v0.1",
+    name: "Mistral 8x7B",
+    shortened: "M8x7B",
+  },
 ];
 
 const llamaTemplate = LlamaTemplate();
