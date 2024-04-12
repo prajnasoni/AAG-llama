@@ -129,7 +129,7 @@ const downloadCSV = (username, messages, completion) => {
 };
 
 export default function HomePage() {
-  const MAX_TOKENS = 4096;
+  const MAX_TOKENS = 4096 * 3;
   const bottomRef = useRef(null);
   const [messages, setMessages] = useState([]);
   const [open, setOpen] = useState(false);
