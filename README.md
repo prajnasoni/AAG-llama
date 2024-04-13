@@ -1,2 +1,2 @@
-# AAG-llama
-LLaMa interface for MIT CSAIL Algorithmic Alignment Lab
+# AAG-Mixtral
+Mixtral interface for MIT CSAIL Algorithmic Alignment Lab

@@ -129,7 +129,7 @@ const downloadCSV = (username, messages, completion) => {
 };
 
 export default function HomePage() {
-  const MAX_TOKENS = 4096 * 3;
+  const MAX_TOKENS = 4096;
   const bottomRef = useRef(null);
   const [messages, setMessages] = useState([]);
   const [open, setOpen] = useState(false);
@@ -207,26 +207,43 @@ export default function HomePage() {
       systemPrompt,
       messageHistory
     )}\n`;
-    // Check if we exceed max tokens and truncate the message history if so.
-    while (countTokens(prompt) > MAX_TOKENS) {
-      if (messageHistory.length < 3) {
-        setError(
-          "Your message is too long. Please try again with a shorter message."
-        );
 
-        return;
-      }
-
-      // Remove the third message from history, keeping the original exchange.
-      messageHistory.splice(1, 2);
-
+    if (countTokens(prompt) > MAX_TOKENS) {
+      let i = 15;
+      console.log("latest 15")
       // Recreate the prompt
       prompt = `${SNIP}\n${generatePrompt(
         llamaTemplate,
         systemPrompt,
-        messageHistory
+        messageHistory.slice(-i)
       )}\n`;
+      while (countTokens(prompt) > MAX_TOKENS) {
+        i--;
+        console.log("iterative splice")
+        // Recreate the prompt
+        prompt = `${SNIP}\n${generatePrompt(
+          llamaTemplate,
+          systemPrompt,
+          messageHistory.slice(-i)
+        )}\n`;
+      }
     }
+
+    // // Check if we exceed max tokens and truncate the message history if so.
+    // while (countTokens(prompt) > MAX_TOKENS) {
+    //   if (messageHistory.length < 3) {
+    //     setError(
+    //       "Your message is too long. Please try again with a shorter message."
+    //     );
+
+    //     return;
+    //   }
+
+    //   // Remove the third message from history, keeping the original exchange.
+    //   messageHistory.splice(1, 2);
+
+
+    // }
 
     setMessages(messageHistory);
 
@@ -248,7 +265,7 @@ export default function HomePage() {
           <div className="hidden sm:inline-block"></div>
           <div className="font-semibold text-gray-500 sm:text-center">
             <img src="https://algorithmicalignment.csail.mit.edu/docs/assets/logo.png" alt="AAG Logo" className="inline-block mr-2 sm:mr-3 h-6" />
-            <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: Llama Chat</span>{" "}
+            <span className="hidden sm:inline-block">MIT CSAIL Algorithmic Alignment Group: Mixtral Chat</span>{" "}
           </div>
           <div className="inline-flex justify-end py-auto px-3">
             <button
