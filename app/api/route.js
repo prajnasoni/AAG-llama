@@ -16,7 +16,7 @@ export async function POST(req) {
   const params = await req.json();
 
   let response;
-  response = await runLlama({ ...params, model: "meta/llama-2-13b-chat" });
+  response = await runLlama({ ...params, model: "meta/llama-2-70b-chat" });
   // response = await runMistral({ ...params, model: "mistralai/mixtral-8x7b-instruct-v0.1" });
 
   // Convert the response into a friendly text-stream
